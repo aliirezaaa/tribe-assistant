@@ -4,17 +4,8 @@ import { ConfigService } from '@nestjs/config';
 import { TribeClient } from '@tribeplatform/gql-client';
 import { Queue } from 'bull';
 import { BullConstants } from 'src/shared/bull/constant';
-type Content = {
-  data: {
-    object: {
-      mapingFields: {
-        key: string;
-        value: string;
-        type: string;
-      }[];
-    };
-  };
-};
+import { Content } from '../types/tribe.type';
+
 @Injectable()
 export class TribeService {
   client: TribeClient;
@@ -23,13 +14,13 @@ export class TribeService {
     @InjectQueue(BullConstants.BULL_QUEUE_NAME) private audioQueue: Queue,
     private readonly config: ConfigService,
   ) {
-    const client = new TribeClient({
+    this.client = new TribeClient({
       clientId: this.config.get<string>('CLIENT_ID'),
       clientSecret: this.config.get<string>('CLIENT_SECRET'),
       graphqlUrl: this.config.get<string>('GRAPH_QL_URL'),
     });
 
-    client
+    this.client
       .generateToken({
         networkId: this.config.get<string>('NETWORK_ID'),
       })
@@ -42,7 +33,24 @@ export class TribeService {
   async getPost() {
     return null;
   }
+  async getSpace(id: string) {
+    const p = await this.client.spaces.get({ id }, 'basic', this.clientToken);
+    console.log(p);
+    console.log('sdfsdf');
+    return p;
+  }
+  async getMember(id: string) {
+    const p = await this.client.members.get(id, 'basic', this.clientToken);
+    console.log(p);
+    console.log('sdfsdf');
+    return p;
+  }
   async analyzePost(webhookBody: Content) {
+    /*
+    TODO: check id and name of data
+     "id": "3d2815e42e3ad441078cee53f941abf8",
+        "name": "post.published",
+    */
     const job = await this.audioQueue.add(webhookBody);
     console.log(job.id);
     return 'webhook data has been received';

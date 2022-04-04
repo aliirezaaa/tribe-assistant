@@ -1,6 +1,5 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
-import { bullQueues } from 'src/shared/bull/bull.service';
 import { BullConstants } from 'src/shared/bull/constant';
 import { UtilService } from 'src/util/util.service';
 import { TribeController } from './controllers/tribe.controller';

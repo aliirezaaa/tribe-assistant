@@ -37,13 +37,14 @@ export class AudioConsumer {
     if (wordCount < this.config.get<number>('MINIMUM_WORD')) {
       return 'text is too short';
     }
-    this.nlpService.analyze(postStrippedText);
+    //this.nlpService.analyze(postStrippedText);
+    console.log(await this.tribeService.getSpace(job.data.data.object.spaceId));
+    console.log(await this.tribeService.getMember(job.data.data.actor.id));
+    await this.nlpService.analyze(postStrippedText);
     //TODO: send post detail to google
 
-    //TODO: get post
-    //TODO: get member
-    //TODO: get space
-
+    //get space
+    //TODO: "publishedAt": "2022-04-01T16:42:21.938Z",
     //TODO: store all data
 
     //   client.posts.

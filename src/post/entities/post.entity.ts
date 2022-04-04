@@ -12,10 +12,31 @@ export class Post {
   public id!: number;
 
   @Column({ type: 'varchar', length: 120 })
-  public name: string;
+  public title: string;
 
   @Column({ type: 'varchar', length: 120 })
-  public email: string;
+  public webhookEventId: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  public content: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  public authorName: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  public authorEmail: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  public category: string;
+
+  @Column('decimal', { precision: 5, scale: 2 })
+  public categoryScore: number;
+
+  @Column({ type: 'varchar', length: 120 })
+  public sentiment: string;
+
+  @Column('decimal', { precision: 5, scale: 2 })
+  public sentimentScore: number;
 
   @Column({ type: 'boolean', default: false })
   public isDeleted: boolean;
