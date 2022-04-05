@@ -6,7 +6,8 @@ export class TribeController {
   constructor(private readonly tribeService: TribeService) {}
   @Post('webhook')
   handleTribeWebhook(@Body() webhookBody: any) {
-    //TODO: pass body to func
+    //TODO: Verifying webhook requests
+    //TODO:X-Tribe-Request-Timestamp and a unique data.id.
     return this.tribeService.analyzePost(webhookBody);
   }
 }

@@ -6,5 +6,6 @@ import { AnalyzedPostService } from './analyzedPost.service';
 @Module({
   imports: [TypeOrmModule.forFeature([AnalyzedPost])],
   providers: [AnalyzedPostService],
+  exports: [AnalyzedPostService, TypeOrmModule],
 })
 export class AnalyzedPostModule {}

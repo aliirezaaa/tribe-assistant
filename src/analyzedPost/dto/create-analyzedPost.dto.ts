@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateAnalyzedPostDto {
   @IsString()
@@ -26,5 +26,12 @@ export class CreateAnalyzedPostDto {
 
   @IsNumber()
   @IsNotEmpty()
-  public sentimentScore: string;
+  public sentimentScore: number;
+
+  @IsString()
+  @IsNotEmpty()
+  public authorName: string;
+  @IsEmail()
+  @IsNotEmpty()
+  public authorEmail: string;
 }

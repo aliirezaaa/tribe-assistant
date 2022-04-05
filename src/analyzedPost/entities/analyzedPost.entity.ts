@@ -17,7 +17,7 @@ export class AnalyzedPost {
   @Column({ type: 'varchar', length: 120 })
   public webhookEventId: string;
 
-  @Column({ type: 'varchar', length: 120 })
+  @Column({ type: 'varchar', length: 5000 })
   public content: string;
 
   @Column({ type: 'varchar', length: 120 })

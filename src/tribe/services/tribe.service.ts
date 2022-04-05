@@ -2,9 +2,10 @@ import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TribeClient } from '@tribeplatform/gql-client';
+import { Member, Space } from '@tribeplatform/gql-client/types';
 import { Queue } from 'bull';
 import { BullConstants } from 'src/shared/bull/constant';
-import { Content } from '../types/tribe.type';
+import { WebhookEvent } from '../types/tribe.type';
 
 @Injectable()
 export class TribeService {
@@ -33,19 +34,19 @@ export class TribeService {
   async getPost() {
     return null;
   }
-  async getSpace(id: string) {
+  async getSpace(id: string): Promise<Space> {
     const p = await this.client.spaces.get({ id }, 'basic', this.clientToken);
     console.log(p);
     console.log('sdfsdf');
     return p;
   }
-  async getMember(id: string) {
+  async getMember(id: string): Promise<Member> {
     const p = await this.client.members.get(id, 'basic', this.clientToken);
     console.log(p);
     console.log('sdfsdf');
     return p;
   }
-  async analyzePost(webhookBody: Content) {
+  async analyzePost(webhookBody: WebhookEvent) {
     /*
     TODO: check id and name of data
      "id": "3d2815e42e3ad441078cee53f941abf8",

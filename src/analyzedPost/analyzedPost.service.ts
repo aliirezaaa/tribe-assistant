@@ -13,11 +13,17 @@ export class AnalyzedPostService {
     return this.repository.findOne(id);
   }
 
-  public createAnalyzedPost(
-    analyzedPost: CreateAnalyzedPostDto,
+  public async createAnalyzedPost(
+    analyzedPostParam: CreateAnalyzedPostDto,
   ): Promise<AnalyzedPost> {
-    const createdAnalyzedPost: AnalyzedPost = new AnalyzedPost();
-    Object.assign(createdAnalyzedPost, analyzedPost);
-    return this.repository.save(createdAnalyzedPost);
+    const analyzedPost: AnalyzedPost = new AnalyzedPost();
+    Object.assign(analyzedPost, analyzedPostParam);
+    console.log(analyzedPost);
+    try {
+      await this.repository.save(analyzedPost);
+    } catch (e) {
+      console.log(e);
+    }
+    return;
   }
 }

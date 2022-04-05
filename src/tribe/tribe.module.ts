@@ -7,6 +7,8 @@ import { TribeService } from './services/tribe.service';
 import { BullConfigService } from '../shared/bull/bull.service';
 import { AudioConsumer } from './consumers/tribe.consumer';
 import { AiModule } from 'src/nlp/nlp.module';
+import { AnalyzedPostService } from 'src/analyzedPost/analyzedPost.service';
+import { AnalyzedPostModule } from 'src/analyzedPost/analyzedPost.module';
 
 @Module({
   imports: [
@@ -15,8 +17,9 @@ import { AiModule } from 'src/nlp/nlp.module';
       name: BullConstants.BULL_QUEUE_NAME,
     }),
     AiModule,
+    AnalyzedPostModule,
   ],
   controllers: [TribeController],
-  providers: [TribeService, UtilService, AudioConsumer],
+  providers: [TribeService, UtilService, AudioConsumer, AnalyzedPostService],
 })
 export class TribeModule {}

@@ -1,5 +1,6 @@
-export type Content = {
+export type WebhookEvent = {
   data: {
+    id: string;
     actor: { id: string };
     object: {
       spaceId: string;
