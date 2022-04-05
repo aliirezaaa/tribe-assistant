@@ -2,6 +2,7 @@ import { Processor, Process } from '@nestjs/bull';
 import { Inject, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Job } from 'bull';
+import { AnalyzedPostService } from 'src/analyzedPost/analyzedPost.service';
 import { INlpService } from 'src/nlp/interfaces/nlp.interface';
 
 import { BullConstants } from 'src/shared/bull/constant';
@@ -15,6 +16,7 @@ export class AudioConsumer {
   constructor(
     private readonly tribeService: TribeService,
     private readonly utilService: UtilService,
+    private readonly analyzedPost: AnalyzedPostService,
     //TODO: use constants
     @Inject('nlpService') private nlpService: INlpService,
     @Inject(ConfigService) private readonly config: ConfigService,
@@ -45,6 +47,16 @@ export class AudioConsumer {
     console.log(await this.tribeService.getMember(job.data.data.actor.id));
     const result = await this.nlpService.analyzeSentiment(postStrippedText);
     console.log('google result', result);
+
+    await this.analyzedPost.createAnalyzedPost({
+  category: result.category,
+  title: ,
+  webhookEventId: '',
+  content: '',
+  categoryScore: 0,
+  sentiment: '',
+  sentimentScore: ''
+})
     //get space
     //TODO: "publishedAt": "2022-04-01T16:42:21.938Z",
     //TODO: store all data

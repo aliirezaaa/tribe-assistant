@@ -1,14 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UtilService } from 'src/util/util.service';
 import { INlpService } from '../interfaces/nlp.interface';
+import { NlpResult } from '../types/nlp.type';
 
-type SentimentResult = {
-  sentiment: string;
-  sentimentScore: number;
-  sentimentMagnitude: number;
-  category: string;
-  categoryConfidence: number;
-};
 const Sentiments = {
   ranges: [
     {
@@ -40,9 +34,9 @@ export class GoogleCloud implements INlpService {
   async print() {
     console.log('print from google');
   }
-  async analyzeSentiment(_text: string): Promise<SentimentResult | null> {
+  async analyzeSentiment(_text: string): Promise<NlpResult | null> {
     // Imports the Google Cloud client library
-    const sentimentResult: SentimentResult = {
+    const sentimentResult: NlpResult = {
       sentiment: '',
       sentimentScore: 0,
       sentimentMagnitude: 0,

@@ -1,10 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
 import { UtilService } from 'src/util/util.service';
 import { GoogleCloud } from '../thirdParties/google-cloud.service';
 @Injectable()
 export class NlpServiceFactory {
   public static createNlpService(utilService: UtilService) {
+    //TODO:
     const type = 'A';
     if (type === 'A') {
       console.log('google cloud created');

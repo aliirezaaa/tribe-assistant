@@ -11,7 +11,7 @@ export class TribeService {
   client: TribeClient;
   clientToken: string;
   constructor(
-    @InjectQueue(BullConstants.BULL_QUEUE_NAME) private audioQueue: Queue,
+    @InjectQueue(BullConstants.BULL_QUEUE_NAME) private postAnalyzeQueue: Queue,
     private readonly config: ConfigService,
   ) {
     this.client = new TribeClient({
@@ -51,7 +51,7 @@ export class TribeService {
      "id": "3d2815e42e3ad441078cee53f941abf8",
         "name": "post.published",
     */
-    const job = await this.audioQueue.add(webhookBody);
+    const job = await this.postAnalyzeQueue.add(webhookBody);
     console.log(job.id);
     return 'webhook data has been received';
   }
