@@ -1,4 +1,4 @@
 export interface INlpService {
-  analyze(text: string): void;
+  analyzeSentiment(text: string): void;
   print(): void;
 }

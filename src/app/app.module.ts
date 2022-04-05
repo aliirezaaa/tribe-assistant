@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { NlpService } from '../nlp/services/nlp.service';
 import { AiModule } from '../nlp/nlp.module';
 
-import { PostModule } from '../post/post.module';
+import { AnalyzedPostModule } from '../analyzedPost/analyzedPost.module';
 import { TribeModule } from '../tribe/tribe.module';
 import { TypeOrmConfigService } from '../shared/typeorm/typeorm.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -21,7 +21,7 @@ import { UtilModule } from 'src/util/util.module';
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
 
     AiModule,
-    PostModule,
+    AnalyzedPostModule,
     TribeModule,
     BullModule,
     UtilModule,

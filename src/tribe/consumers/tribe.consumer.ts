@@ -40,7 +40,7 @@ export class AudioConsumer {
     //this.nlpService.analyze(postStrippedText);
     console.log(await this.tribeService.getSpace(job.data.data.object.spaceId));
     console.log(await this.tribeService.getMember(job.data.data.actor.id));
-    await this.nlpService.analyze(postStrippedText);
+    await this.nlpService.analyzeSentiment(postStrippedText);
     //TODO: send post detail to google
 
     //get space

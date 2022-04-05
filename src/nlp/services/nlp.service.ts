@@ -6,7 +6,7 @@ export class NlpService implements INlpService {
   print(): void {
     throw new Error('Method not implemented.');
   }
-  analyze(_text: string): void {
+  analyzeSentiment(_text: string): void {
     throw new Error('Method not implemented.');
   }
 }

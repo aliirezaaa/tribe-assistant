@@ -6,7 +6,7 @@ export class GoogleCloud implements INlpService {
   async print() {
     console.log('print from google');
   }
-  async analyze(_text: string): Promise<void> {
+  async analyzeSentiment(_text: string): Promise<void> {
     // Imports the Google Cloud client library
     try {
       // eslint-disable-next-line
