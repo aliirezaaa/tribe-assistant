@@ -1,7 +1,7 @@
-import { NlpFactory } from './nlp.factory';
+import { NlpServiceFactory } from './nlp.factory';
 
 describe('AssistantFactory', () => {
   it('should be defined', () => {
-    expect(new NlpFactory()).toBeDefined();
+    expect(new NlpServiceFactory()).toBeDefined();
   });
 });

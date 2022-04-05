@@ -13,10 +13,11 @@ export class AnalyzedPostService {
     return this.repository.findOne(id);
   }
 
-  public createAnalyzedPost(body: CreateAnalyzedPostDto) {
-    // const user: Post = new Post();
-    // user.name = body.name;
-    // user.email = body.email;
-    // return this.repository.save(user);
+  public createAnalyzedPost(
+    analyzedPost: CreateAnalyzedPostDto,
+  ): Promise<AnalyzedPost> {
+    const createdAnalyzedPost: AnalyzedPost = new AnalyzedPost();
+    Object.assign(createdAnalyzedPost, analyzedPost);
+    return this.repository.save(createdAnalyzedPost);
   }
 }

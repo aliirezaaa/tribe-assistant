@@ -2,7 +2,8 @@ import { Processor, Process } from '@nestjs/bull';
 import { Inject, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Job } from 'bull';
-import { NlpService } from 'src/nlp/services/nlp.service';
+import { INlpService } from 'src/nlp/interfaces/nlp.interface';
+
 import { BullConstants } from 'src/shared/bull/constant';
 import { UtilService } from 'src/util/util.service';
 import { TribeService } from '../services/tribe.service';
@@ -14,7 +15,8 @@ export class AudioConsumer {
   constructor(
     private readonly tribeService: TribeService,
     private readonly utilService: UtilService,
-    @Inject('nlpService') private nlpService: NlpService,
+    //TODO: use constants
+    @Inject('nlpService') private nlpService: INlpService,
     @Inject(ConfigService) private readonly config: ConfigService,
   ) {
     const logger = new Logger();
@@ -27,6 +29,7 @@ export class AudioConsumer {
     //const post = this.tribeService.getPost();
 
     const postBody = job.data.data.object.mappingFields.find(
+      //  TODO: use constatnt
       (item) => item.key == 'content',
     );
 
@@ -40,9 +43,8 @@ export class AudioConsumer {
     //this.nlpService.analyze(postStrippedText);
     console.log(await this.tribeService.getSpace(job.data.data.object.spaceId));
     console.log(await this.tribeService.getMember(job.data.data.actor.id));
-    await this.nlpService.analyzeSentiment(postStrippedText);
-    //TODO: send post detail to google
-
+    const result = await this.nlpService.analyzeSentiment(postStrippedText);
+    console.log('google result', result);
     //get space
     //TODO: "publishedAt": "2022-04-01T16:42:21.938Z",
     //TODO: store all data

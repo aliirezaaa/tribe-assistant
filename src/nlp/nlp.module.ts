@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
 
-import { NlpService } from './services/nlp.service';
-import { NlpFactory } from './factories/nlp.factory';
+import { NlpServiceFactory } from './factories/nlp.factory';
+import { UtilService } from 'src/util/util.service';
 const nlpService = {
   provide: 'nlpService',
-  useFactory: () => {
-    return NlpFactory.createNlpService('A');
+  useFactory: (utilService: UtilService) => {
+    return NlpServiceFactory.createNlpService(utilService);
   },
-  inject: [NlpService],
+  inject: [UtilService],
 };
 @Module({
-  providers: [nlpService, NlpService],
+  providers: [nlpService, UtilService],
   exports: ['nlpService'],
 })
 export class AiModule {}

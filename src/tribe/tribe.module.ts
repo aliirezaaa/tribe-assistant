@@ -6,7 +6,6 @@ import { TribeController } from './controllers/tribe.controller';
 import { TribeService } from './services/tribe.service';
 import { BullConfigService } from '../shared/bull/bull.service';
 import { AudioConsumer } from './consumers/tribe.consumer';
-import { NlpService } from 'src/nlp/services/nlp.service';
 import { AiModule } from 'src/nlp/nlp.module';
 
 @Module({
@@ -18,6 +17,6 @@ import { AiModule } from 'src/nlp/nlp.module';
     AiModule,
   ],
   controllers: [TribeController],
-  providers: [TribeService, UtilService, AudioConsumer, NlpService],
+  providers: [TribeService, UtilService, AudioConsumer],
 })
 export class TribeModule {}
