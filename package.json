@@ -1,8 +1,8 @@
 {
-  "name": "tribe-ai-assistant",
+  "name": "tribe-assistant",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Alireza Javaheri",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -40,6 +40,7 @@
     "typeorm": "^0.2.45"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.19",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.4.3",

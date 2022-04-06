@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from '../app/controllers/app.controller';
-import { AppService } from './app.service';
-import { AiModule } from '../nlp/nlp.module';
+import { NlpModule } from '../nlp/nlp.module';
 import { AnalyzedPostModule } from '../analyzedPost/analyzedPost.module';
 import { TribeModule } from '../tribe/tribe.module';
 import { TypeOrmConfigService } from '../shared/typeorm/typeorm.service';
@@ -17,13 +15,11 @@ import { UtilModule } from 'src/util/util.module';
     }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
 
-    AiModule,
+    NlpModule,
     AnalyzedPostModule,
     TribeModule,
     BullModule,
     UtilModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

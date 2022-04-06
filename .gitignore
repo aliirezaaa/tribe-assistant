@@ -35,3 +35,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 /alirezaj-1cb024c4f626.json
 /.env
+/documentation

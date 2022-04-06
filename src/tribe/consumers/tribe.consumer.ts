@@ -27,7 +27,7 @@ export class TribeConsumer {
   @Process()
   async transcode(job: Job<WebhookEvent>) {
     console.log('processing job');
-
+    //TODO: check id and header
     //const post = this.tribeService.getPost();
     let postBody: string;
     let postTitle: string;
@@ -70,15 +70,6 @@ export class TribeConsumer {
     //TODO: "publishedAt": "2022-04-01T16:42:21.938Z",
     //TODO: store all data
 
-    //   client.posts.
-
-    //let progress = 0;
-    /*
-      get post 
-      get member(authur)
-      get space
-      get title
-      */
     return {};
   }
 }
