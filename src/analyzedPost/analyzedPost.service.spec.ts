@@ -7,7 +7,13 @@ describe('PostService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [AnalyzedPostService],
-    }).compile();
+    })
+      .useMocker((token) => {
+        if (token === 'AnalyzedPostRepository') {
+          return { findAll: jest.fn().mockResolvedValue([]) };
+        }
+      })
+      .compile();
 
     service = module.get<AnalyzedPostService>(AnalyzedPostService);
   });

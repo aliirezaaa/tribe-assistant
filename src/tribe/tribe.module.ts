@@ -5,7 +5,7 @@ import { UtilService } from 'src/util/util.service';
 import { TribeController } from './controllers/tribe.controller';
 import { TribeService } from './services/tribe.service';
 import { BullConfigService } from '../shared/bull/bull.service';
-import { AudioConsumer } from './consumers/tribe.consumer';
+import { TribeConsumer } from './consumers/tribe.consumer';
 import { AiModule } from 'src/nlp/nlp.module';
 import { AnalyzedPostService } from 'src/analyzedPost/analyzedPost.service';
 import { AnalyzedPostModule } from 'src/analyzedPost/analyzedPost.module';
@@ -20,6 +20,6 @@ import { AnalyzedPostModule } from 'src/analyzedPost/analyzedPost.module';
     AnalyzedPostModule,
   ],
   controllers: [TribeController],
-  providers: [TribeService, UtilService, AudioConsumer, AnalyzedPostService],
+  providers: [TribeService, UtilService, TribeConsumer, AnalyzedPostService],
 })
 export class TribeModule {}

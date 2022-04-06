@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { UtilService } from 'src/util/util.service';
+import { Injectable } from '@nestjs/common';
+import { UtilService } from '../../util/util.service';
 import { INlpService } from '../interfaces/nlp.interface';
 import { NlpResult } from '../types/nlp.type';
 
@@ -31,8 +31,9 @@ const Sentiments = {
 export class GoogleCloud implements INlpService {
   constructor(private utilService: UtilService) {}
 
-  async print() {
+  print(): string {
     console.log('print from google');
+    return 'asdasd';
   }
   async analyzeSentiment(_text: string): Promise<NlpResult | null> {
     // Imports the Google Cloud client library

@@ -2,17 +2,17 @@ import { Processor, Process } from '@nestjs/bull';
 import { Inject, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Job } from 'bull';
-import { AnalyzedPostService } from 'src/analyzedPost/analyzedPost.service';
-import { INlpService } from 'src/nlp/interfaces/nlp.interface';
+import { AnalyzedPostService } from '../../analyzedPost/analyzedPost.service';
+import { INlpService } from '../../nlp/interfaces/nlp.interface';
 
-import { BullConstants } from 'src/shared/bull/constant';
-import { UtilService } from 'src/util/util.service';
+import { BullConstants } from '../../shared/bull/constant';
+import { UtilService } from '../../util/util.service';
 import { TribeService } from '../services/tribe.service';
 import { WebhookEvent } from '../types/tribe.type';
 
 @Processor(BullConstants.BULL_QUEUE_NAME)
 //TODO: add logger
-export class AudioConsumer {
+export class TribeConsumer {
   constructor(
     private readonly tribeService: TribeService,
     private readonly utilService: UtilService,

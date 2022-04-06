@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { TribeClient } from '@tribeplatform/gql-client';
 import { Member, Space } from '@tribeplatform/gql-client/types';
 import { Queue } from 'bull';
-import { BullConstants } from 'src/shared/bull/constant';
+import { BullConstants } from '../../shared/bull/constant';
 import { WebhookEvent } from '../types/tribe.type';
 
 @Injectable()
