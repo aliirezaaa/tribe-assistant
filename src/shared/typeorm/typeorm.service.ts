@@ -1,12 +1,19 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
-
+/**
+ * @classdesc
+ * This class implements TypeOrmOptionsFactory to create and return the TypeOrmModuleOptions.
+ * This module is used for connecting the app and database
+ */
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   @Inject(ConfigService)
   private readonly config: ConfigService;
-
+  /**
+   *
+   * @return {TypeOrmModuleOptions} - A typeorm option object for creating the database module
+   */
   public createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'postgres',

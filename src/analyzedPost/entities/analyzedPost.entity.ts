@@ -6,6 +6,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+/**
+ * @classdesc
+ * This class defines AnalyzedPost entity object for interacting with the database
+ */
+
+//TODO: add all of params
 @Entity()
 export class AnalyzedPost {
   @PrimaryGeneratedColumn()
@@ -13,6 +19,12 @@ export class AnalyzedPost {
 
   @Column({ type: 'varchar', length: 120 })
   public title: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  public spaceId: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  public spaceName: string;
 
   @Column({ type: 'varchar', length: 120 })
   public webhookEventId: string;

@@ -8,13 +8,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BullModule } from '@nestjs/bull';
 import { UtilModule } from 'src/util/util.module';
 
+/**
+ * This is the core module and manages all classes and dependencies
+ */
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
-
     NlpModule,
     AnalyzedPostModule,
     TribeModule,

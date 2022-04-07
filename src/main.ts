@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 /**
  * @function
- * this function creates app and set the listen port
+ * This function creates the main app and set the listen port
  */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -4,9 +4,17 @@ import { ConfigService } from '@nestjs/config';
 import { TribeClient } from '@tribeplatform/gql-client';
 import { Member, Space } from '@tribeplatform/gql-client/types';
 import { Queue } from 'bull';
-import { BullConstants } from '../../shared/bull/constant';
-import { Webhook } from '../types/webhook.type';
+import { BullConstants } from '../../shared/constants/bull.constant';
+import { WebhookDataType } from '../types/webhook.type';
 
+/**
+ * @classdesc
+ * This class related to handle these tasks:
+ * - creating tribeClient using Tribe gpl library
+ * - get space from Tribe using Tribe client
+ * - get member from Tribe using Tribe client
+ * - provides a function for Tribe webhook controller
+ */
 @Injectable()
 export class TribeService {
   client: TribeClient;
@@ -15,6 +23,13 @@ export class TribeService {
     @InjectQueue(BullConstants.BULL_QUEUE_NAME) private postAnalyzeQueue: Queue,
     private readonly config: ConfigService,
   ) {
+    this.initTribeClient();
+  }
+  /**
+   * @function
+   * This function is called at the constructor to create Tribe client and storing the client access token
+   */
+  initTribeClient() {
     this.client = new TribeClient({
       clientId: this.config.get<string>('CLIENT_ID'),
       clientSecret: this.config.get<string>('CLIENT_SECRET'),
@@ -31,28 +46,40 @@ export class TribeService {
         this.clientToken = accessToken;
       });
   }
-  async getPost() {
-    return null;
-  }
+
+  /**
+   * @function
+   * This function uses Tribe client to find Tribe space
+   * @param {string} id - A space id
+   * @return {Space} - A founded space object
+   */
   async getSpace(id: string): Promise<Space> {
-    const p = await this.client.spaces.get({ id }, 'basic', this.clientToken);
-    console.log(p);
-    console.log('sdfsdf');
-    return p;
+    return await this.client.spaces.get({ id }, 'basic', this.clientToken);
   }
+
+  /**
+   * @function
+   * This function uses Tribe client to find Tribe member
+   * @param {string} id - A member id
+   * @return {Member} - A  founded member object
+   */
   async getMember(id: string): Promise<Member> {
-    const p = await this.client.members.get(id, 'basic', this.clientToken);
-    console.log(p);
-    console.log('sdfsdf');
-    return p;
+    return await this.client.members.get(id, 'basic', this.clientToken);
   }
-  async analyzePost(webhookBody: Webhook) {
+
+  /**
+   * @function
+   * This function uses Bull Queue for processing webhook data by adding the webhook data to Queue
+   * @param {WebhookDataType} webhookData - A webhook data
+   * @return {string} - A string that shows a webhook has been received
+   */
+  async analyzePost(webhookData: WebhookDataType) {
     /*
     TODO: check id and name of data
      "id": "3d2815e42e3ad441078cee53f941abf8",
         "name": "post.published",
     */
-    await this.postAnalyzeQueue.add(webhookBody);
+    await this.postAnalyzeQueue.add(webhookData);
 
     return 'webhook data has been received';
   }

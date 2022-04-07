@@ -1,40 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { UtilService } from '../../util/util.service';
+import { Sentiments } from '../constants/google.constant';
 import { INlpService } from '../interfaces/nlp.interface';
 import { NlpResult } from '../types/nlp.type';
-
-const Sentiments = {
-  ranges: [
-    {
-      name: 'very negative',
-      rangeNumbers: [-1, -0.75],
-    },
-    {
-      name: 'negative',
-      rangeNumbers: [-0.75, -0.25],
-    },
-    {
-      name: 'neutral',
-      rangeNumbers: [-0.25, 0.25],
-    },
-    {
-      name: 'positive',
-      rangeNumbers: [0.25, 0.75],
-    },
-    {
-      name: 'very positive',
-      rangeNumbers: [0.75, 1],
-    },
-  ],
-};
+/**
+ * This class implements INlpService interface and includes functions related to classifying sentiment text using external API
+ */
 @Injectable()
-export class GoogleCloud implements INlpService {
+export class GoogleNlpService implements INlpService {
   constructor(private utilService: UtilService) {}
 
-  print(): string {
-    console.log('print from google');
-    return 'asdasd';
-  }
+  /**
+   * @function
+   * This function receives a text and extracts its sentiment using google NLP API
+   * @param  {string} _text - A text that should be analyzed and classify its sentiment
+   * @return {NlpResult | null} -  An object of NlpResult or null if any error occurs
+   */
   async analyzeSentiment(_text: string): Promise<NlpResult | null> {
     // Imports the Google Cloud client library
     const sentimentResult: NlpResult = {
@@ -52,7 +33,6 @@ export class GoogleCloud implements INlpService {
       const client = new language.LanguageServiceClient();
 
       // The text to analyze
-
       const document = {
         content: _text,
         type: 'PLAIN_TEXT',
@@ -62,9 +42,6 @@ export class GoogleCloud implements INlpService {
       const sentiment = result.documentSentiment;
 
       //general sentiment
-      console.log(`Text: ${_text}`);
-      console.log(`Sentiment score: ${sentiment.score}`);
-      console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
       sentimentResult.sentiment = this.calculateSentimentName(sentiment.score);
       sentimentResult.sentimentScore = sentiment.score;
       sentimentResult.sentimentMagnitude = sentiment.magnitude;
@@ -72,20 +49,12 @@ export class GoogleCloud implements INlpService {
       // Classifies text in the document
       const [classification] = await client.classifyText({ document });
       // get category
-      console.log('Categories:');
+
       sentimentResult.category = classification.categories[0].name;
       sentimentResult.categoryConfidence =
         classification.categories[0].confidence;
-      classification.categories.forEach((category) => {
-        console.log(
-          `Name: ${category.name}, Confidence: ${category.confidence}`,
-        );
-      });
+
       return sentimentResult;
-      /*
-      general sentiment with score
-      category with score
-      */
     } catch (err) {
       console.log(err);
       return null;

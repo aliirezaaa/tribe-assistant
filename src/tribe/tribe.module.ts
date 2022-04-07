@@ -1,15 +1,18 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
-import { BullConstants } from '../shared/bull/constant';
+import { BullConstants } from '../shared/constants/bull.constant';
 import { UtilService } from '../util/util.service';
 import { TribeController } from './controllers/tribe.controller';
 import { TribeService } from './services/tribe.service';
 import { BullConfigService } from '../shared/bull/bull.service';
-import { TribeConsumer } from './consumers/tribe.consumer';
+import { TribeWebhookDataConsumer } from './consumers/tribe.consumer';
 import { NlpModule } from '../nlp/nlp.module';
 import { AnalyzedPostService } from '../analyzedPost/analyzedPost.service';
 import { AnalyzedPostModule } from '../analyzedPost/analyzedPost.module';
 
+/**
+ * This module manages all classes relate to TribeModule
+ */
 @Module({
   imports: [
     BullModule.forRootAsync({ useClass: BullConfigService }),
@@ -20,6 +23,11 @@ import { AnalyzedPostModule } from '../analyzedPost/analyzedPost.module';
     AnalyzedPostModule,
   ],
   controllers: [TribeController],
-  providers: [TribeService, UtilService, TribeConsumer, AnalyzedPostService],
+  providers: [
+    TribeService,
+    UtilService,
+    TribeWebhookDataConsumer,
+    AnalyzedPostService,
+  ],
 })
 export class TribeModule {}

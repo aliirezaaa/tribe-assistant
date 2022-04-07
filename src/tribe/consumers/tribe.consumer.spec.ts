@@ -3,14 +3,14 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AnalyzedPostService } from '../../analyzedPost/analyzedPost.service';
 import { UtilService } from '../../util/util.service';
 import { TribeService } from '../services/tribe.service';
-import { TribeConsumer } from './tribe.consumer';
+import { TribeWebhookDataConsumer } from './tribe.consumer';
 
 describe('TribeConsumer', () => {
-  let service: TribeConsumer;
+  let service: TribeWebhookDataConsumer;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TribeConsumer],
+      providers: [TribeWebhookDataConsumer],
     })
       .useMocker((token) => {
         if (token === ConfigService) {
@@ -31,7 +31,7 @@ describe('TribeConsumer', () => {
       })
       .compile();
 
-    service = module.get<TribeConsumer>(TribeConsumer);
+    service = module.get<TribeWebhookDataConsumer>(TribeWebhookDataConsumer);
   });
 
   it('should be defined', () => {

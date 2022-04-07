@@ -1,11 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { BullConstants } from './constant';
+import { BullConstants } from '../constants/bull.constant';
 import {
   BullModuleOptions,
   SharedBullConfigurationFactory,
 } from '@nestjs/bull';
-
+/**
+ * @classdesc
+ * This class implements SharedBullConfigurationFactory to create and return the congiguration of Bull module
+ */
 @Injectable()
 export class BullConfigService implements SharedBullConfigurationFactory {
   @Inject(ConfigService)
