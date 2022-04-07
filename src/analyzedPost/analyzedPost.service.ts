@@ -15,15 +15,14 @@ export class AnalyzedPostService {
 
   public async createAnalyzedPost(
     analyzedPostParam: CreateAnalyzedPostDto,
-  ): Promise<AnalyzedPost> {
+  ): Promise<AnalyzedPost | null> {
     const analyzedPost: AnalyzedPost = new AnalyzedPost();
     Object.assign(analyzedPost, analyzedPostParam);
-    console.log(analyzedPost);
+
     try {
-      await this.repository.save(analyzedPost);
+      return await this.repository.save(analyzedPost);
     } catch (e) {
-      console.log(e);
+      return null;
     }
-    return;
   }
 }

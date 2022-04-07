@@ -1,13 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 import { TribeService } from '../services/tribe.service';
-
+import { WebhookData } from '../tribe.decorator';
+import { Webhook } from '../types/webhook.type';
 @Controller('tribe')
 export class TribeController {
   constructor(private readonly tribeService: TribeService) {}
   @Post('webhook')
-  handleTribeWebhook(@Body() webhookBody: any) {
-    //TODO: Verifying webhook requests
-    //TODO:X-Tribe-Request-Timestamp and a unique data.id.
-    return this.tribeService.analyzePost(webhookBody);
+  handleTribeWebhook(@WebhookData() webhookData: Webhook) {
+    return this.tribeService.analyzePost(webhookData);
   }
 }

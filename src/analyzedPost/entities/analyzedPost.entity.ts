@@ -41,7 +41,7 @@ export class AnalyzedPost {
   @Column({ type: 'boolean', default: false })
   public isDeleted: boolean;
 
-  /*
+  /**
    * Create and Update Date Columns
    */
 

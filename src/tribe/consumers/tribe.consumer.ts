@@ -8,7 +8,8 @@ import { INlpService } from '../../nlp/interfaces/nlp.interface';
 import { BullConstants } from '../../shared/bull/constant';
 import { UtilService } from '../../util/util.service';
 import { TribeService } from '../services/tribe.service';
-import { WebhookEvent } from '../types/tribe.type';
+
+import { Webhook } from '../types/webhook.type';
 
 @Processor(BullConstants.BULL_QUEUE_NAME)
 //TODO: add logger
@@ -25,13 +26,13 @@ export class TribeConsumer {
     logger.log('alireza');
   }
   @Process()
-  async transcode(job: Job<WebhookEvent>) {
+  async transcode(job: Job<Webhook>) {
     console.log('processing job');
     //TODO: check id and header
-    //const post = this.tribeService.getPost();
     let postBody: string;
     let postTitle: string;
-    job.data.data.object.mappingFields.forEach((element) => {
+    this.specifyPostItems();
+    job.data.dataList.forEach((element) => {
       if (element.key == 'content') {
         postBody = element.value;
       }
@@ -48,17 +49,15 @@ export class TribeConsumer {
       return 'text is too short';
     }
     //this.nlpService.analyze(postStrippedText);
-    const space = await this.tribeService.getSpace(
-      job.data.data.object.spaceId,
-    );
-    const author = await this.tribeService.getMember(job.data.data.actor.id);
+    const space = await this.tribeService.getSpace(job.data.spaceId);
+    const author = await this.tribeService.getMember(job.data.actorId);
     const result = await this.nlpService.analyzeSentiment(postStrippedText);
     console.log('google result', result);
 
     await this.analyzedPost.createAnalyzedPost({
       category: result.category,
       title: postTitle,
-      webhookEventId: job.data.data.id,
+      webhookEventId: job.data.dataId,
       content: postStrippedText,
       categoryScore: result.categoryConfidence,
       sentiment: result.sentiment,
@@ -66,10 +65,12 @@ export class TribeConsumer {
       authorName: author.name,
       authorEmail: author.email,
     });
-    //get space
+
     //TODO: "publishedAt": "2022-04-01T16:42:21.938Z",
-    //TODO: store all data
 
     return {};
+  }
+  specifyPostItems() {
+    throw new Error('Method not implemented.');
   }
 }

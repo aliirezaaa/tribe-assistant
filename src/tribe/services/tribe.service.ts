@@ -5,7 +5,7 @@ import { TribeClient } from '@tribeplatform/gql-client';
 import { Member, Space } from '@tribeplatform/gql-client/types';
 import { Queue } from 'bull';
 import { BullConstants } from '../../shared/bull/constant';
-import { WebhookEvent } from '../types/tribe.type';
+import { Webhook } from '../types/webhook.type';
 
 @Injectable()
 export class TribeService {
@@ -46,14 +46,14 @@ export class TribeService {
     console.log('sdfsdf');
     return p;
   }
-  async analyzePost(webhookBody: WebhookEvent) {
+  async analyzePost(webhookBody: Webhook) {
     /*
     TODO: check id and name of data
      "id": "3d2815e42e3ad441078cee53f941abf8",
         "name": "post.published",
     */
-    const job = await this.postAnalyzeQueue.add(webhookBody);
-    console.log(job.id);
+    await this.postAnalyzeQueue.add(webhookBody);
+
     return 'webhook data has been received';
   }
 }
