@@ -1,73 +1,177 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Tribe Assistant
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Tribe Assistant is an app on the Tribe platform to help community owners to get more insights about users' posts.
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+Add the "Tribe Assistant" app to a community on the Tribe platform.
 
-```bash
-$ npm install
+The app receives webhooks when a post is published to any space of a network in the Tribe community.
+
+Then the app checks webhook validity and extract data from the body of the webhook and passes it to a natural language process service like Google or Microsoft.
+
+Using an NLP service helps to classify post content sentiments and categorize them.
+
+Finally, the general sentiment and category of the post data are stored in the database with the actual post content
+
+## Features
+
+- Classify sentiment of posts
+- Classify category of posts
+- Ability to Use Google NLP service or any other NLP services
+- Storing analyzed posts in the database
+
+
+## Idea
+## Demo
+
+Insert gif or link to demo
+
+
+## Tech Stack
+
+**Database:** Postgres
+
+**Core service:** Nestjs
+
+**Database UI Client:** pgAdmin
+
+**Queue Managment:** BullQ
+
+**Queue-Storage:** Redis
+
+
+
+## API Reference
+
+#### Handle Tribe webhooks
+
+```http
+  POST /tribe/webhook
 ```
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+#### Get item
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```http
+  GET /api/items/${id}
 ```
 
-## Test
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+#### add(num1, num2)
+
+Takes two numbers and returns the sum.
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`PORT` - Listen port of service
+
+`DATABASE_USER` - Database username
+
+`DATABASE_HOST` - Database host
+
+`DATABASE_PASSWORD` - Database password
+
+`DATABASE_NAME` - Database name
+
+`DATABASE_PORT` - Database port
+
+`NETWORK_ID` - Networkd Id of Tribe app
+
+`CLIENT_ID` - Client Id of Tribe app
+
+`CLIENT_SECRET` - Client secret of Tribe app
+
+`SIGNING_SECRET`- Signing secret of Tribe app
+
+`GRAPH_QL_URL` - Tribe graphql url
+
+`REDIS_HOST` - Redis host
+
+`REDIS_PORT` - Redis port
+
+`MINIMUM_WORD` - Minimum number of words to pass into NLP service
+
+`NLP_SERVICE` - Name of NLP service (eg: google)
+
+## Appendix
+
+Any additional information goes here
+
+
+## Authors
+
+- [@katherinepeterson](https://www.github.com/octokatherine)
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at fake@fake.com
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+  git clone https://link-to-project
 ```
 
-## Support
+Go to the project directory
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+  cd my-project
+```
 
-## Stay in touch
+Install dependencies
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+  npm install
+```
 
-## License
+Start the server
 
-Nest is [MIT licensed](LICENSE).
+```bash
+  npm run start
+```
+
+
+## Roadmap
+
+- Additional browser support
+
+- Add more integrations
+
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Acknowledgements
+
+ - [Tribe](https://tribe.so/) 
+ - [Tribe devhub community](https://community.tribe.so/devhub/)
+
+
+## Documentation
+
+[Documentation](https://linktodocumentation)
+
