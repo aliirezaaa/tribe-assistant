@@ -56,11 +56,17 @@ export class GoogleNlpService implements INlpService {
 
       return sentimentResult;
     } catch (err) {
-      //TODO: use logger
-      console.log(err);
+      console.log('analyzeSentiment', err);
       return null;
     }
   }
+
+  /**
+   * @function
+   * Return sentement name using sentiment score
+   * @param {number} sentimentScore - sentiment score number
+   * @return {string} - name of the sentiment
+   */
   calculateSentimentName(sentimentScore: number): string {
     for (const rang of Sentiments.ranges) {
       if (

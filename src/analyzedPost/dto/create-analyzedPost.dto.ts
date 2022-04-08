@@ -4,14 +4,14 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
  * @classdesc
  *  This class defines data transform object for creating AnalyzedPost object
  */
-//TODO: add all parametes
+
 export class CreateAnalyzedPostDto {
   @IsString()
   @IsNotEmpty()
   public title: string;
   @IsString()
   @IsNotEmpty()
-  public webhookEventId: string;
+  public webhookDataId: string;
 
   @IsString()
   @IsNotEmpty()
@@ -47,4 +47,8 @@ export class CreateAnalyzedPostDto {
   @IsEmail()
   @IsNotEmpty()
   public authorEmail: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public publishedAt: string;
 }

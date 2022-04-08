@@ -74,13 +74,7 @@ export class TribeService {
    * @return {string} - A string that shows a webhook has been received
    */
   async analyzePost(webhookData: WebhookDataType): Promise<string> {
-    /*
-    TODO: check id and name of data
-     "id": "3d2815e42e3ad441078cee53f941abf8",
-        "name": "post.published",
-    */
     await this.postAnalyzeQueue.add(webhookData);
-
     return 'webhook data has been received';
   }
 }

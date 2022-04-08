@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnalyzedPost } from './entities/analyzedPost.entity';
 import { AnalyzedPostService } from './analyzedPost.service';
@@ -8,7 +8,7 @@ import { AnalyzedPostService } from './analyzedPost.service';
  */
 @Module({
   imports: [TypeOrmModule.forFeature([AnalyzedPost])],
-  providers: [AnalyzedPostService],
+  providers: [AnalyzedPostService, Logger],
   exports: [AnalyzedPostService, TypeOrmModule],
 })
 export class AnalyzedPostModule {}

@@ -4,6 +4,7 @@ import { UtilService } from '../../util/util.service';
 describe('Google NLP service', () => {
   let googleNlpService: GoogleNlpService;
   let util: UtilService;
+
   beforeEach(async () => {
     util = new UtilService();
     googleNlpService = new GoogleNlpService(util);

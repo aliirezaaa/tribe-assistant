@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TribeService } from '../services/tribe.service';
 import { WebhookDataType } from '../types/webhook.type';
@@ -34,6 +33,8 @@ describe('TribeController', () => {
       dataList: [],
       spaceId: '',
       actorId: '',
+      publishedAt: '',
+      rawBody: undefined,
     };
 
     expect(await controller.handleTribeWebhook(webhookData)).toBe(result);

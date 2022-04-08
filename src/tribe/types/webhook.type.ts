@@ -10,4 +10,6 @@ export type WebhookDataType = {
   dataList: any[];
   spaceId: string;
   actorId: string;
+  publishedAt: string;
+  rawBody: any;
 };

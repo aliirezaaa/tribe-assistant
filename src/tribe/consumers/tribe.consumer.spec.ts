@@ -4,7 +4,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AnalyzedPostService } from '../../analyzedPost/analyzedPost.service';
 import { UtilService } from '../../util/util.service';
 import { TribeService } from '../services/tribe.service';
-import { WebhookDataType } from '../types/webhook.type';
 import { TribeWebhookDataConsumer } from './tribe.consumer';
 
 describe('TribeConsumer', () => {

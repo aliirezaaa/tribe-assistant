@@ -18,11 +18,11 @@ export class AnalyzedPostService {
   /**
    * @function
    * Use id for quest an AnalyzedPost
-   * @param {number} id - analyzedPost id
+   * @param {string} dataId - analyzedPost data Id
    * @return {AnalyzedPost} - An instance of AnalyzedPost
    */
-  public getAnalyzedPost(id: number): Promise<AnalyzedPost> {
-    return this.repository.findOne(id);
+  public getAnalyzedPost(dataId: string): Promise<AnalyzedPost> {
+    return this.repository.findOne({ where: { webhookDataId: dataId } });
   }
 
   /**

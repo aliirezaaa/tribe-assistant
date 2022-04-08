@@ -11,7 +11,6 @@ import {
  * This class defines AnalyzedPost entity object for interacting with the database
  */
 
-//TODO: add all of params
 @Entity()
 export class AnalyzedPost {
   @PrimaryGeneratedColumn()
@@ -20,14 +19,14 @@ export class AnalyzedPost {
   @Column({ type: 'varchar', length: 120 })
   public title: string;
 
-  @Column({ type: 'varchar', length: 120 })
+  @Column({ type: 'varchar', length: 120, nullable: true })
   public spaceId: string;
 
-  @Column({ type: 'varchar', length: 120 })
+  @Column({ type: 'varchar', length: 120, nullable: true })
   public spaceName: string;
 
-  @Column({ type: 'varchar', length: 120 })
-  public webhookEventId: string;
+  @Column({ type: 'varchar', length: 120, nullable: true })
+  public webhookDataId: string;
 
   @Column({ type: 'varchar', length: 5000 })
   public content: string;
@@ -52,6 +51,9 @@ export class AnalyzedPost {
 
   @Column({ type: 'boolean', default: false })
   public isDeleted: boolean;
+
+  @Column({ type: 'varchar', length: 120, nullable: true })
+  public publishedAt: string;
 
   /**
    * Create and Update Date Columns

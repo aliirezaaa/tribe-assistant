@@ -18,6 +18,8 @@ export const WebhookData = createParamDecorator(
       dataList: request.body.data.object.mappingFields,
       spaceId: request.body.data.object.spaceId,
       actorId: request.body.data.actor.id,
+      publishedAt: request.body.data.object.publishedAt,
+      rawBody: request.rawBody,
     };
 
     return webhookData;

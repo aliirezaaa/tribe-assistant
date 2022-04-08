@@ -2,7 +2,7 @@
  * this class used dor utilites
  */
 import { Injectable } from '@nestjs/common';
-
+import * as crypto from 'crypto';
 @Injectable()
 export class UtilService {
   /**
@@ -32,5 +32,54 @@ export class UtilService {
     const max = Math.max(num1, num2);
 
     return value > min && value < max;
+  }
+
+  isSignatureValid(
+    token: string,
+    secret: string,
+    rawBody: any,
+    timestamp: number,
+  ): boolean {
+    try {
+      const MILLISECONDS_IN_MINUTE = 1000 * 60;
+
+      const getSignature = (options: {
+        secret: string;
+        body: string;
+        timestamp: number;
+      }): string => {
+        const { secret, body, timestamp } = options;
+        return crypto
+          .createHmac('sha256', secret)
+          .update(`${timestamp}:${body}`)
+          .digest('hex');
+      };
+      const verifySignature = (options: {
+        signature: string;
+        secret: string;
+        body: string;
+        timestamp: number;
+      }): boolean => {
+        const { signature, secret, body, timestamp } = options;
+        const timeDifference =
+          (timestamp - new Date().getTime()) / MILLISECONDS_IN_MINUTE;
+        if (timeDifference > 5) return false;
+        const hash = getSignature({ secret, body, timestamp });
+        return crypto.timingSafeEqual(
+          Buffer.from(signature),
+          Buffer.from(hash),
+        );
+      };
+
+      return verifySignature({
+        signature: token,
+        secret: secret,
+        body: rawBody,
+        timestamp: timestamp,
+      });
+    } catch (error) {
+      console.log('isSignatureValid', error);
+      return false;
+    }
   }
 }
