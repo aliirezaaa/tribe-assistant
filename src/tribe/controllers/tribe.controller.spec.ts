@@ -1,6 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TribeService } from '../services/tribe.service';
+import { WebhookDataType } from '../types/webhook.type';
 import { TribeController } from './tribe.controller';
 
 describe('TribeController', () => {
@@ -12,10 +13,7 @@ describe('TribeController', () => {
     })
       .useMocker((token) => {
         if (token === TribeService) {
-          return { findAll: jest.fn().mockResolvedValue('') };
-        }
-        if (token === ConfigService) {
-          return { findAll: jest.fn().mockResolvedValue('') };
+          return { analyzePost: jest.fn().mockResolvedValue('ok') };
         }
       })
       .compile();
@@ -25,5 +23,19 @@ describe('TribeController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  test('the webhook result should be ok', async () => {
+    const result = 'ok';
+    const webhookData: WebhookDataType = {
+      signature: '',
+      requestTimestamp: 0,
+      dataId: '',
+      dataList: [],
+      spaceId: '',
+      actorId: '',
+    };
+
+    expect(await controller.handleTribeWebhook(webhookData)).toBe(result);
   });
 });

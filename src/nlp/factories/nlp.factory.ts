@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UtilService } from 'src/util/util.service';
+import { INlpService } from '../interfaces/nlp.interface';
 import { GoogleNlpService } from '../services/google-nlp.service';
 
 /**
@@ -14,7 +15,7 @@ export class NlpServiceFactory {
    * @param {UtilService} utilService - An object instance of utilService for injecting to nlpService creation
    * @return - An instance of nlpService
    */
-  public static createNlpService(utilService: UtilService) {
+  public static createNlpService(utilService: UtilService): INlpService | null {
     //TODO:
     const type = 'A';
     if (type === 'A') {

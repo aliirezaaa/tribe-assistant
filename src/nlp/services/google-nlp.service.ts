@@ -56,6 +56,7 @@ export class GoogleNlpService implements INlpService {
 
       return sentimentResult;
     } catch (err) {
+      //TODO: use logger
       console.log(err);
       return null;
     }

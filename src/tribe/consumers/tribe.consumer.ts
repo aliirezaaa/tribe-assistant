@@ -35,7 +35,7 @@ export class TribeWebhookDataConsumer {
    * @return {string} - A string that shows job process was finished
    */
   @Process()
-  async processWebhookData(job: Job<WebhookDataType>) {
+  async processWebhookData(job: Job<WebhookDataType>): Promise<string> {
     console.log('processing job');
     //TODO: check id and header
 

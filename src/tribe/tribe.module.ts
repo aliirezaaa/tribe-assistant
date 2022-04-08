@@ -1,5 +1,5 @@
 import { BullModule } from '@nestjs/bull';
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { BullConstants } from '../shared/constants/bull.constant';
 import { UtilService } from '../util/util.service';
 import { TribeController } from './controllers/tribe.controller';
@@ -28,6 +28,7 @@ import { AnalyzedPostModule } from '../analyzedPost/analyzedPost.module';
     UtilService,
     TribeWebhookDataConsumer,
     AnalyzedPostService,
+    Logger,
   ],
 })
 export class TribeModule {}

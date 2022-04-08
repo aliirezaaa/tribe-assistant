@@ -73,7 +73,7 @@ export class TribeService {
    * @param {WebhookDataType} webhookData - A webhook data
    * @return {string} - A string that shows a webhook has been received
    */
-  async analyzePost(webhookData: WebhookDataType) {
+  async analyzePost(webhookData: WebhookDataType): Promise<string> {
     /*
     TODO: check id and name of data
      "id": "3d2815e42e3ad441078cee53f941abf8",
