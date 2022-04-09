@@ -42,7 +42,6 @@ export class TribeService {
       })
       .then(async (accessToken) => {
         //set globally
-        console.log(accessToken);
         this.clientToken = accessToken;
       });
   }
