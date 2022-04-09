@@ -14,7 +14,7 @@ Then the app checks webhook validity and extract data from the body of the webho
 
 Using an NLP service helps to classify post content sentiments and categorize them.
 
-Finally, the general sentiment and category of the post data are stored in the database with the actual post content
+Finally,  in addition to the general sentiment and category of the post data, the actual post content, author, and published time are stored in the database.
 
 ## Features
 
@@ -25,47 +25,17 @@ Finally, the general sentiment and category of the post data are stored in the d
 
 
 ## Idea
+As a community owner, you may have multiple spaces about your products or any other content. your members post about your product every day and they share their reviews with each other. these posts include good reviews or bad ones and it is important to respond to them.
+usually, the owner wants to respond to negative sentiment reviews quicker and help the author of the review.
+but if there were many posts with huge content, the owner should read all of them and realizes the sentiments of the post, and respond to them. but as it's clear, this process takes a lot of time.
+In this situation, the Assistant app comes to help community owners.
+
+The Assistant app realizes post sentiments and their category of it using the natural language process. this helps the owner to respond to each post that needs a quicker response.
+
+In the future release of the Assistant app, it could generate a suitable response based on post content, sentiments, and category of it and reply to post.
 ## Demo
 
 Insert gif or link to demo
-
-
-## Tech Stack
-
-**Database:** Postgres
-
-**Core service:** Nestjs
-
-**Database UI Client:** pgAdmin
-
-**Queue Managment:** BullQ
-
-**Queue-Storage:** Redis
-
-
-
-## API Reference
-
-#### Handle Tribe webhooks
-
-```http
-  POST /tribe/webhook
-```
-
-
-#### Get item
-
-```http
-  GET /api/items/${id}
-```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
 
 
 ## Environment Variables
@@ -102,53 +72,44 @@ To run this project, you will need to add the following environment variables to
 
 `NLP_SERVICE` - Name of NLP service (eg: google)
 
-## Appendix
-
-Any additional information goes here
-
-
-## Authors
-
-- [@katherinepeterson](https://www.github.com/octokatherine)
-
-
-## Feedback
-
-If you have any feedback, please reach out to us at fake@fake.com
-
-
 ## Run Locally
 
-Clone the project
+- Please follow this link to prepare Google Natural Language Processing service
+ 
+    [sentiment analysis google client libraries](https://cloud.google.com/natural-language/docs/sentiment-analysis-client-libraries)
 
-```bash
-  git clone https://link-to-project
+ 
+- Clone the project
+
+- Install dependencies
+
+    ```bash
+    npm install
+    ```
+- Run external services like Postgres and Redis
+
+
+- Start the server
+
+    ```bash
+    npm run start
+    ```
+
+- Also you can use docker to start server. 
+    ```bash
+    docker-compose up
+    ```
+
+
+## API Reference
+
+#### Handle Tribe webhooks
+
+```http
+  POST /tribe/webhook
 ```
 
-Go to the project directory
 
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
-
-
-## Roadmap
-
-- Additional browser support
-
-- Add more integrations
 
 
 ## Running Tests
@@ -160,9 +121,29 @@ To run tests, run the following command
 ```
 
 
-## Screenshots
+## Tech Stack
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+**Database:** Postgres
+
+**Core service:** Nestjs
+
+**Database UI Client:** pgAdmin
+
+**Queue Managment:** BullQ
+
+**Queue-Storage:** Redis
+
+
+
+## Feedback
+
+If you have any feedback, please reach out to me at javaheri.manesh@gmail.com
+
+
+## Roadmap
+
+- Auto reply to post by generating a suitable response based on post content, sentiments, and category of the post
+
 
 
 ## Acknowledgements
@@ -172,6 +153,8 @@ To run tests, run the following command
 
 
 ## Documentation
-
-[Documentation](https://linktodocumentation)
-
+Documentation can be reach by generating it
+```bash
+    npx @compodoc/compodoc -p tsconfig.json -s -r 8050
+```
+Then open http://localhost:8050
