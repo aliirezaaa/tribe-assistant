@@ -35,7 +35,7 @@ The Assistant app realizes post sentiments and their category of it using the na
 In the future release of the Assistant app, it could generate a suitable response based on post content, sentiments, and category of it and reply to post.
 ## Demo
 
-![Tribe Assistant App Introduction](https://www.youtube.com/watch?v=ruCnhlESUns)
+[Tribe Assistant App Introduction](https://www.youtube.com/watch?v=ruCnhlESUns)
 
 ## Architecture
 ![Architecture](https://github.com/aliirezaaa/tribe-assistant/blob/main/architecture.png?raw=true)
