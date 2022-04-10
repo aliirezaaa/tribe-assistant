@@ -38,6 +38,9 @@ In the future release of the Assistant app, it could generate a suitable respons
 Insert gif or link to demo
 
 
+
+## Architecture
+![Architecture](https://github.com/aliirezaaa/tribe-assistant/blob/main/architecture.png?raw=true)
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
