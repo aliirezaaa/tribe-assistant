@@ -35,16 +35,16 @@ export class TribeWebhookDataConsumer {
   @Process()
   async processWebhookData(job: Job<WebhookDataType>): Promise<string> {
     this.logger.debug('start processing a job');
-    // if (
-    //   !(await this.isWebbhokDataValid(
-    //     job.data.signature,
-    //     job.data.dataId,
-    //     job.data.rawBody,
-    //     job.data.requestTimestamp,
-    //   ))
-    // ) {
-    //   return 'webhook data is not valid';
-    // }
+    if (
+      !(await this.isWebbhokDataValid(
+        job.data.signature,
+        job.data.dataId,
+        job.data.rawBody,
+        job.data.requestTimestamp,
+      ))
+    ) {
+      return 'webhook data is not valid';
+    }
     const [postBody, postTitle] = this.specifyPostItems(job.data.dataList);
     const postStrippedText = this.utilService.stripText(postBody);
     const wordCount = this.utilService.wordCount(postStrippedText);
